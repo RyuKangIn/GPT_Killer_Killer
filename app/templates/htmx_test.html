@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>GPT Killer</title>
+
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10/dist/ext/json-enc.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+    textarea {
+      width: 100%;
+      height: 300px;
+      font-size: 14px;
+      padding: 10px;
+    }
+    button {
+      margin-top: 12px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #result {
+      background: #111;
+      color: #0f0;
+      padding: 16px;
+      margin-top: 20px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>GPT Killer (HTMX 테스트)</h2>
+
+  <textarea name="text" id="textInput"
+    placeholder="자기소개서를 줄바꿈 그대로 붙여넣으세요"></textarea>
+
+  <br>
+
+  <button
+    hx-post="http://127.0.0.1:8000/ai/gpt_killer"
+    hx-trigger="click"
+    hx-target="#result"
+    hx-ext="json-enc"
+    hx-headers='{"Content-Type": "application/json"}'
+    hx-vals='js:{ text: document.getElementById("textInput").value }'>
+    분석 요청
+  </button>
+
+  <div id="result">결과가 여기에 표시됩니다.</div>
+
+</body>
+</html>
